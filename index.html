@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Classifier | SKPTC Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">Diploma AI &amp; ML Mini Project</p>
+                <h1>Fake News Classifier</h1>
+                <p class="subtitle">
+                    Paste any news content and the model will predict whether it looks
+                    <strong>REAL</strong> or <strong>FAKE</strong>.
+                </p>
+                <div class="hero-tags">
+                    <span>Machine Learning</span>
+                    <span>Flask Website</span>
+                    <span>Designed for SKPTC</span>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="stat">
+                    <span class="stat-label">Project Type</span>
+                    <span class="stat-value">Text Classification</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Algorithm</span>
+                    <span class="stat-value">TF-IDF + Logistic Regression</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Use Case</span>
+                    <span class="stat-value">Real vs Fake News Detection</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-grid">
+            <section class="panel input-panel">
+                <h2>Check News Content</h2>
+                <p class="panel-text">
+                    Enter or paste news text from any source. The model will analyze the language pattern and show the result.
+                </p>
+
+                <form method="POST">
+                    <label for="news_text">News Content</label>
+                    <textarea id="news_text" name="news_text" rows="12" placeholder="Paste the news content here...">{{ submitted_text }}</textarea>
+                    <button type="submit">Analyze News</button>
+                </form>
+            </section>
+
+            <section class="panel result-panel">
+                <h2>Prediction Result</h2>
+
+                {% if prediction %}
+                    <div class="result-box {% if prediction == 'REAL' %}real{% else %}fake{% endif %}">
+                        <p class="result-label">Prediction</p>
+                        <h3>{{ prediction }}</h3>
+                        <p class="confidence">Confidence: {{ confidence }}%</p>
+                    </div>
+                    <p class="note">
+                        This is a student project prediction. It helps demonstrate machine learning, but it should not replace trusted fact-checking websites.
+                    </p>
+                {% else %}
+                    <div class="empty-state">
+                        <p>Your result will appear here after you click <strong>Analyze News</strong>.</p>
+                    </div>
+                {% endif %}
+            </section>
+        </main>
+
+        <section class="panel info-panel">
+            <h2>How This Project Works</h2>
+            <div class="info-cards">
+                <article>
+                    <h3>1. Input</h3>
+                    <p>User pastes news text into the website.</p>
+                </article>
+                <article>
+                    <h3>2. Processing</h3>
+                    <p>The system converts words into machine-learning features using TF-IDF.</p>
+                </article>
+                <article>
+                    <h3>3. Prediction</h3>
+                    <p>The trained Logistic Regression model predicts whether the text looks real or fake.</p>
+                </article>
+                <article>
+                    <h3>4. Output</h3>
+                    <p>The website displays the result with confidence percentage.</p>
+                </article>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Fake News Classifier Project | Prepared for Diploma AI &amp; ML Presentation | SKPTC Theme</p>
+        </footer>
+    </div>
+</body>
+</html>
